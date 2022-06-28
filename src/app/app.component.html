@@ -1,0 +1,48 @@
+<p>Using a variable</p>
+<div class="header">
+  <ul class="nav">
+    <li *ngFor="let item of menu">
+      <a [routerLink]="item.href">{{item.label}}</a>
+      <ul *ngIf="item.children">
+        <li *ngFor="let submenu of item.children">
+          <a [routerLink]="submenu.href">{{submenu.label}}</a>
+          <ul *ngIf="submenu.children">
+            <li *ngFor="let submenu2 of submenu.children">
+              <a [routerLink]="submenu2.href">{{submenu2.label}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<p> using the service</p>
+<div class="header">
+<ul class="nav">
+  <li *ngFor="let item of menuService.getObjectMenu()|async">
+    <a [routerLink]="item.href">{{item.label}}</a>
+    <ul *ngIf="item.children">
+      <li *ngFor="let submenu of item.children">
+        <a [routerLink]="submenu.href">{{submenu.label}}</a>
+        <ul *ngIf="submenu.children">
+          <li *ngFor="let submenu2 of submenu.children">
+            <a [routerLink]="submenu2.href">{{submenu2.label}}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+<p> using a variable and recursive element</p>
+<div class="header">
+<ul class="nav" recursive [children]="menu"></ul>
+</div>
+<p> using the service and a recurvive element</p>
+<div class="header">
+<ul class="nav" recursive [children]="menuService.getObjectMenu()|async"></ul>
+</div>
+<p> using the service the function that use when return all the menus in an unique table</p>
+<div class="header">
+<ul class="nav" recursive [children]="menuService.getObjectMenu2()|async"></ul>
+</div>
